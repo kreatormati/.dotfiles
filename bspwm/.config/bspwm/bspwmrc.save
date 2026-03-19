@@ -1,0 +1,55 @@
+#!/usr/bin/env bash
+
+pgrep -x sxhkd > /dev/null || sxhkd &
+
+# Polkit
+/usr/libexec/polkit-mate-authentication-agent-1 &
+
+bspc monitor -d ▪ ▪ ▪ ▪ ▪ ▪ ▪
+
+bspc config border_width         1
+bspc config window_gap           10
+
+bspc config split_ratio          7
+bspc config borderless_monocle   false
+bspc config gapless_monocle      false
+bspc config pointer_follows_focus false
+bspc config focus_follows_pointer true
+
+bspc rule -a Brave-browser:pop-up desktop='^8' state=floating follow=on
+bspc rule -a Brave-browser:Extension desktop='^8' state=floating follow=on
+bspc rule -a onboard desktop='^8' state=floating follow=on
+bspc rule -a feh desktop='^8' state=floating follow=on
+bspc rule -a mpv desktop='^8' state=floating follow=on
+bspc rule -a mplayer2 desktop='^8' state=floating follow=on
+bspc rule -a kitty desktop='^8' state=floating follow=on
+
+bspc config focused_border_color        "#b23a3a"
+bspc config normal_border_color         "#073642"
+bspc config active_border_color         "#073642"
+
+# Autostart
+
+sh ~/.screenlayout/monitor.sh &
+xrandr --output eDP-1 --scale 1.25x1.25 &
+# Bar
+polybar &
+/usr/bin/dunst &
+
+nflameshot &
+xss-lock --transfer-sleep-lock -- i3lock --nofork &
+/usr/lib/mate-polkit/polkit-mate-authentication-agent-1 &
+feh --bg-max ~/Pictures/wall/ &
+
+# Dex
+dex -a -s /etc/xdg/autostart/:~/.config/autostart/  &
+
+# Network Applet
+nm-applet &
+
+# Cursor
+xsetroot -cursor_name left_ptr &
+
+# Low battery notifier
+~/.config/bspwm/scripts/low_bat_notifier.sh &
+pgrep -x myscript ||❯ fastfetch --config ~/.config/fastfetch/simple.jsonc

@@ -1,0 +1,7 @@
+# This file contains fish universal variable definitions.
+# VERSION: 3.0
+SETUVAR --export --path GOPATH:/home/kazumin/go
+SETUVAR --export --path PATH:/home/kazumin/\x2elocal/go/bin
+SETUVAR __fish_initialized:4300
+SETUVAR fish_greeting:\x1d
+SETUVAR --export fish_user_paths:/home/kazumin/\x2elocal/go/bin\x1e/home/kazumin/dev/flutter/bin\x1e/home/kazumin/development/flutter/bin
